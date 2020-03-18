@@ -1,7 +1,7 @@
 {
-  "python.pythonPath": "${workspaceFolder}/env/bin/python3",
+  "python.pythonPath": "/home/calagan/anaconda3/envs/techformize/bin/python",
   "editor.formatOnSave": true,
-  "python.linting.pycodestyleEnabled": true,
+  "python.linting.pycodestyleEnabled": false,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintPath": "pylint",
   "python.linting.pylintArgs": ["W0614", "--load-plugins", "pylint_django"],
@@ -9,5 +9,6 @@
   "python.linting.pycodestyleArgs": ["--ignore=E501"],
   "files.exclude": {
     "**/*.pyc": true
-  }
+  },
+  "python.linting.enabled": true
 }

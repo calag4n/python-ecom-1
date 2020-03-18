@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<!--Main layout-->
+<main>
+  <div class="container">
+
+    <div class="table-responsive">
+      <h2>Demande de retour</h2>
+
+      <form method="post" class="card-body">
+        {% csrf_token %}
+
+        {% comment %} <div class="md-form mb-5">
+          {{ form.ref_code}}
+          <label for="ref_code" class="">Ref. Commande</label>
+        </div>
+
+        <div class="md-form mb-5">
+          {{ form.email }}
+          <label for="email" class="">email</label>
+        </div>
+
+        <div class="md-form">
+          {{ form.message }}
+          <label for="message" class="">Message</label>
+        </div> {% endcomment %}
+
+        {{form|crispy}}
+
+        <button class="btn btn-primary  " type="submit">Envoyer</button>
+
+      </form>
+
+    </div>
+
+  </div>
+</main>
+<!--Main layout-->
+
+{% endblock content %}
