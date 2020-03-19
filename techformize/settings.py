@@ -1,9 +1,9 @@
 import os
 import django_heroku
 
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+# ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
-# DEBUG = True
+
 DEBUG = os.environ.get('DEBUG_VALUE')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
