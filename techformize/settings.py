@@ -1,4 +1,5 @@
 import os
+import django_heroku
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
@@ -104,3 +105,5 @@ LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STRIPE_SECRET_KEY = 'sk_test_SkyjgaoAAa52ZM60Sbqb3buA00sfGEoquD'
+
+django_heroku.settings(locals())
