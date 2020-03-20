@@ -31,6 +31,8 @@ Django = "==2.2.10"
 Pillow = "==6.2.0"
 gunicorn = "*"
 django-heroku = "*"
+boto3 = "*"
+django-storages = "*"
 
 [requires]
 python_version = "3.8"

@@ -40,15 +40,15 @@ class CheckoutView(View):
                 context.update({
                     'default_shipping_address': shipping_address_qs[0]
                 })
-            
-                billing_address_qs = Address.objects.filter(
-                    user=self.request.user,
-                    address_type='B',
-                )
-                if billing_address_qs.exists():
-                    context.update({
-                    'default_billing_address': billing_address_qs[0]
-                    })
+
+                # billing_address_qs = Address.objects.filter(
+                #     user=self.request.user,
+                #     address_type='B',
+                # )
+                # if billing_address_qs.exists():
+                #     context.update({
+                #         'default_billing_address': billing_address_qs[0]
+                #     })
 
             return render(self.request, 'checkout.html', context)
 
@@ -64,21 +64,22 @@ class CheckoutView(View):
             if form.is_valid():
                 shipping_address = form.cleaned_data.get('shipping_address')
                 shipping_address_2 = form.cleaned_data.get(
-                    'shipping_address_2')
+                    'shipping_address2')
                 shipping_country = form.cleaned_data.get('shipping_country')
                 shipping_zipcode = form.cleaned_data.get('shipping_zipcode')
 
-                billing_address = form.cleaned_data.get('billing_address')
-                billing_address_2 = form.cleaned_data.get('billing_address_2')
-                billing_country = form.cleaned_data.get('billing_country')
-                billing_zipcode = form.cleaned_data.get('billing_zipcode')
+                # billing_address = form.cleaned_data.get('billing_address')
+                # billing_address_2 = form.cleaned_data.get('billing_address2')
+                # billing_country = form.cleaned_data.get('billing_country')
+                # billing_zipcode = form.cleaned_data.get('billing_zipcode')
 
-                same_billing_address = form.cleaned_data(
+                same_billing_address = form.cleaned_data.get(
                     'same_billing_address')
 
-                # save_info = form.cleaned_data.get('save_info')
+                save_info = form.cleaned_data.get('save_info')
                 payment_option = form.cleaned_data.get('payment_option')
-                shipping_address = Address(
+
+                shipping_address_block = Address(
                     user=self.request.user,
                     address=shipping_address,
                     address_2=shipping_address_2,
@@ -87,28 +88,34 @@ class CheckoutView(View):
                     address_type='S'
                 )
 
-                if same_billing_address:
-                    billing_address = Address(
-                        user=self.request.user,
-                        address=shipping_address,
-                        address_2=shipping_address_2,
-                        country=shipping_country,
-                        zipcode=shipping_zipcode,
-                        address_type='B'
-                    )
-                else:
-                    billing_address = Address(
-                        user=self.request.user,
-                        address=billing_address,
-                        address_2=billing_address_2,
-                        country=billing_country,
-                        zipcode=billing_zipcode,
-                        address_type='B'
-                    )
+                # if same_billing_address:
+                # billing_address_block = Address(
+                #     user=self.request.user,
+                #     address=shipping_address,
+                #     address_2=shipping_address_2,
+                #     country=shipping_country,
+                #     zipcode=shipping_zipcode,
+                #     address_type='B'
+                # )
+                # else:
+                #     billing_address = Address(
+                #         user=self.request.user,
+                #         address=billing_address,
+                #         address_2=billing_address_2,
+                #         country=billing_country,
+                #         zipcode=billing_zipcode,
+                #         address_type='B'
+                #     )
 
-                order.billing_address = billing_address
+                shipping_address_block.save()
+                # order.billing_address = billing_address_block
+                order.shipping_address = shipping_address_block
 
-                billing_address.save()
+                print(self.request)
+                print(order)
+                print(order.shipping_address)
+
+                # billing_address_block.save()
                 order.save()
 
                 if payment_option == 'S':
@@ -149,7 +156,11 @@ class CheckoutView(View):
 class PaymentView(View):
     def get(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
-        if order.billing_address:
+        print(self.request)
+        print(order)
+        print(order.shipping_address)
+
+        if order.shipping_address:
             context = {
                 'order': order
             }

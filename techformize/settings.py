@@ -4,11 +4,10 @@ import django_heroku
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
 
-DEBUG = os.environ.get('DEBUG_VALUE')
+DEBUG = (os.environ.get('DEBUG_VALUE') == "True")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['https://techformize.herokuapp.com/']
@@ -27,6 +26,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'django_countries',
+    'storages',
 
     'core'
 ]
@@ -104,6 +104,13 @@ LOGIN_REDIRECT_URL = '/'
 # Crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-STRIPE_SECRET_KEY = 'sk_test_SkyjgaoAAa52ZM60Sbqb3buA00sfGEoquD'
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 django_heroku.settings(locals())
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
