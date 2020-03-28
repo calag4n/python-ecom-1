@@ -1,7 +1,7 @@
 .view,
 body,
 html {
-	height: 100%;
+	height: auto;
 }
 .carousel {
 	height: 50%;
@@ -19,6 +19,7 @@ html {
 .page-footer {
 	background-color: #929fba;
 }
-body {
+body,
+html {
 	min-height: 100vh;
 }

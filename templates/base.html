@@ -19,39 +19,20 @@
   <!-- Your custom styles (optional) -->
   <link href="{% static 'css/style.min.css'%}" rel="stylesheet">
   <style type="text/css">
-    html,
-    header,
-    .carousel {
-      height: 60vh;
-    }
-
     body {
       min-height: 100vh;
+      height: auto;
     }
 
     footer {
-      color: red;
+      position: relative;
+      bottom: 0px;
+      width: 100%;
     }
 
-    @media (max-width: 740px) {
+    @media (max-width: 740px) {}
 
-      html,
-      body,
-      header,
-      .carousel {
-        height: 100vh;
-      }
-    }
-
-    @media (min-width: 800px) and (max-width: 850px) {
-
-      html,
-      body,
-      header,
-      .carousel {
-        height: 100vh;
-      }
-    }
+    @media (min-width: 800px) and (max-width: 850px) {}
   </style>
 </head>
 

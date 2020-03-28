@@ -2,7 +2,7 @@
 html,
 body,
 .view {
-	height: 100%;
+	height: auto;
 }
 
 /* Half Page Carousel itself*/
